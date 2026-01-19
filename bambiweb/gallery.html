@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Bambini on Duke</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #FF8B8B; 
+            --yellow: #FFF5BA; 
+            --blue: #A2D2FF; 
+            --cream: #FEF9F3; 
+            --ink: #443C35;
+        }
+
+        * {
+            box-sizing: border-box;
+            max-width: 100%;
+        }
+
+        .logo-img {
+            height: 120px;
+            width: auto;
+            display: block;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 480px) {
+            .logo-img {
+                height: 80px;
+            }
+        }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body {
+            margin: 0; 
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--cream); 
+            color: var(--ink);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 { 
+            font-family: 'Fredoka', sans-serif; 
+            margin-top: 0;
+            word-wrap: break-word;
+        }
+
+        /* --- Background Icons Layer --- */
+        .bg-icons-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.15;
+            font-size: 1.5rem;
+        }
+
+        .bg-icon {
+            position: absolute;
+            animation: float-icon 6s infinite ease-in-out;
+        }
+
+        @keyframes float-icon {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .ic-1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .ic-2 { top: 8%; left: 90%; animation-delay: 1s; }
+        .ic-3 { top: 40%; left: 85%; animation-delay: 2s; }
+        .ic-4 { top: 60%; left: 8%; animation-delay: 1.5s; }
+        .ic-5 { top: 85%; left: 15%; animation-delay: 3s; }
+        .ic-6 { top: 75%; left: 92%; animation-delay: 0.5s; }
+        .ic-7 { top: 25%; left: 50%; animation-delay: 4s; }
+        .ic-8 { top: 70%; left: 45%; animation-delay: 2.5s; }
+
+        /* --- Boutique Scalloped Nav --- */
+        header {
+            position: relative;
+            background: white;
+            padding: 20px 5% 20px; 
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 30px;
+            background-color: white;
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5,73.84-4.36,147.54,16.88,218.2,35.26,69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="black"/></svg>');
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5,73.84-4.36,147.54,16.88,218.2,35.26,69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="black"/></svg>');
+            mask-size: cover;
+            -webkit-mask-size: cover;
+            transform: rotate(180deg);
+        }
+
+        .logo-group { 
+            text-decoration: none; 
+            display: flex; 
+            flex-direction: column;
+            transition: 0.3s;
+            flex-shrink: 0;
+        }
+        
+        .logo-group:hover { transform: scale(1.05); }
+        
+        .nav-links { 
+            display: flex; 
+            gap: clamp(15px, 3vw, 40px); 
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            flex-grow: 1;
+        }
+        
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--ink); 
+            font-weight: 700; 
+            font-family: 'Fredoka', sans-serif; 
+            position: relative; 
+            font-size: clamp(0.9rem, 2vw, 1.1rem); 
+            white-space: nowrap;
+        }
+        
+        .nav-links a::after { 
+            content: ""; 
+            position: absolute; 
+            width: 100%; 
+            height: 8px; 
+            bottom: -2px; 
+            left: 0; 
+            background: var(--yellow); 
+            z-index: -1; 
+            transform: scaleX(0); 
+            transition: 0.3s; 
+            border-radius: 5px; 
+            transform-origin: left; 
+        }
+        
+        .nav-links a:hover::after { transform: scaleX(1); }
+        
+        .nav-cta { 
+            background: var(--blue) !important; 
+            color: white !important; 
+            padding: 12px 25px !important; 
+            border-radius: 50px !important; 
+            box-shadow: 0 5px 0px #8bbce7 !important; 
+            transition: 0.2s !important;
+            font-size: 1rem !important;
+            white-space: nowrap !important;
+            margin-left: 10px;
+        }
+        
+        .nav-cta:hover { 
+            transform: translateY(2px) !important; 
+            box-shadow: 0 2px 0px #8bbce7 !important; 
+        }
+
+        /* --- Gallery Header --- */
+        .gallery-header {
+            text-align: center;
+            padding: 60px 5% 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-header h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: var(--red);
+            margin-bottom: 20px;
+        }
+
+        .gallery-header p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            opacity: 0.8;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* --- Gallery Grid --- */
+        .gallery-container {
+            padding: 0 5% 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            justify-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+                gap: 30px;
+            }
+        }
+
+        .gallery-item {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            .gallery-item {
+                height: 350px;
+                border-radius: 30px;
+            }
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            font-size: 1.2rem;
+            margin: 0 0 5px 0;
+            color: white;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.9rem;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* --- Lightbox Modal --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 20px;
+            font-size: 1.1rem;
+            max-width: 80%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: transform 0.3s;
+        }
+
+        .lightbox-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+        }
+
+        .lightbox-nav button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .lightbox-nav button:hover {
+            background: rgba(255,255,255,0.4);
+        }
+
+        /* --- Back to Home --- */
+        .back-home {
+            text-align: center;
+            padding: 40px 5% 60px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--red);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255,139,139,0.3);
+        }
+
+        .back-btn:hover {
+            background: #ff6b6b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255,139,139,0.4);
+        }
+
+        footer { 
+            padding: 30px 5%; 
+            text-align: center; 
+            background: #fff; 
+            font-weight: 600; 
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+            border-top: 2px solid var(--yellow);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-item {
+                height: 280px;
+            }
+            
+            .nav-links {
+                gap: 10px;
+                justify-content: space-between;
+                width: 100%;
+                margin-top: 10px;
+            }
+            
+            .nav-links a {
+                font-size: 0.85rem;
+                padding: 5px 8px;
+            }
+            
+            .nav-cta {
+                padding: 10px 20px !important;
+                font-size: 0.9rem !important;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-icons-layer">
+        <span class="bg-icon ic-1">⭐</span>
+        <span class="bg-icon ic-2">⚽</span>
+        <span class="bg-icon ic-3">☂️</span>
+        <span class="bg-icon ic-4">🎨</span>
+        <span class="bg-icon ic-5">🧸</span>
+        <span class="bg-icon ic-6">⭐</span>
+        <span class="bg-icon ic-7">⚽</span>
+        <span class="bg-icon ic-8">☂️</span>
+    </div>
+
+    <header>
+        <nav>
+            <a href="bamweb.html" class="logo-group">
+                <img src="logo.jpg" alt="Bambini on Duke Logo" class="logo-img">
+            </a>
+            <div class="nav-links">
+                <a href="bamweb.html#about">About Us</a>
+                <a href="bamweb.html#structure">Structure</a>
+                <a href="gallery.html" style="color: var(--red);">Gallery</a>
+                <a href="bamweb.html#enroll" class="nav-cta">Join Us</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="gallery-header">
+        <h1>Our Happy Moments</h1>
+        <p>Take a peek into the joyful world of Bambini on Duke! Here you'll find snapshots of our little learners playing, creating, and growing together in our nurturing environment.</p>
+    </section>
+
+    <section class="gallery-container">
+        <div class="gallery-grid">
+            <!-- Gallery Item 1 -->
+            <div class="gallery-item" onclick="openLightbox('group.jpg', 'Our Happy Family')">
+                <img src="group.jpg" alt="Bambini Preschool Group" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Our Happy Family</h3>
+                    <p>All our little learners together</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 2 -->
+            <div class="gallery-item" onclick="openLightbox('IMG_2126.JPG', 'Creative Playtime')">
+                <img src="IMG_2126.JPG" alt="Creative Playtime" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Creative Playtime</h3>
+                    <p>Where imagination takes flight</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 3 -->
+            <div class="gallery-item" onclick="openLightbox('hat.jpg', 'Outdoor Adventures')">
+                <img src="hat.jpg" alt="Outdoor Play" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Outdoor Adventures</h3>
+                    <p>Fun in our safe play area</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 4 -->
+            <div class="gallery-item" onclick="openLightbox('santa.jpg', 'Holiday Fun')">
+                <img src="santa.jpg" alt="Holiday Activities" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Holiday Fun</h3>
+                    <p>Seasonal celebrations and joy</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 5 -->
+            <div class="gallery-item" onclick="openLightbox('fire.jpg', 'Safety First')">
+                <img src="fire.jpg" alt="Safety Education" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Safety First</h3>
+                    <p>Learning important life skills</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 6 -->
+            <div class="gallery-item" onclick="openLightbox('IMG_3281.JPG', 'Music & Movement')">
+                <img src="IMG_3281.JPG" alt="Music Class" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Music & Movement</h3>
+                    <p>Dancing to the rhythm of joy</p>
+                </div>
+            </div>
+
+            <!-- Add more gallery items as needed -->
+            <!-- Example for additional images -->
+            <!--
+            <div class="gallery-item" onclick="openLightbox('your-image.jpg', 'Your Title')">
+                <img src="your-image.jpg" alt="Description" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Your Title</h3>
+                    <p>Your description here</p>
+                </div>
+            </div>
+            -->
+
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <div class="lightbox-nav">
+            <button onclick="changeImage(-1)">❮</button>
+            <button onclick="changeImage(1)">❯</button>
+        </div>
+        <img class="lightbox-content" id="lightbox-img" src="" alt="">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
+    <div class="back-home">
+        <a href="bamweb.html" class="back-btn">← Back to Homepage</a>
+    </div>
+
+    <footer>
+        <p>Bambini on Duke • 16 Duke Road • The happiest place to be</p>
+    </footer>
+
+    <script>
+        // Gallery images data - FIXED the image filenames
+        const galleryImages = [
+            { src: 'group.jpg', title: 'Our Happy Family', description: 'All our little learners together' },
+            { src: 'IMG_2126.JPG', title: 'Creative Playtime', description: 'Where imagination takes flight' },
+            { src: 'hat.jpg', title: 'Outdoor Adventures', description: 'Fun in our safe play area' },
+            { src: 'santa.jpg', title: 'Holiday Fun', description: 'Seasonal celebrations and joy' },
+            { src: 'fire.jpg', title: 'Safety First', description: 'Learning important life skills' },
+            { src: 'IMG_3281.JPG', title: 'Music & Movement', description: 'Dancing to the rhythm of joy' }
+            // Add more images here as you add them to the gallery
+        ];
+
+        let currentImageIndex = 0;
+
+        function openLightbox(imageSrc, title) {
+            // Find the index of the clicked image
+            currentImageIndex = galleryImages.findIndex(img => img.src === imageSrc);
+            updateLightbox();
+            document.getElementById('lightbox').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            
+            // Loop around if at ends
+            if (currentImageIndex < 0) {
+                currentImageIndex = galleryImages.length - 1;
+            } else if (currentImageIndex >= galleryImages.length) {
+                currentImageIndex = 0;
+            }
+            
+            updateLightbox();
+        }
+
+        function updateLightbox() {
+            const image = galleryImages[currentImageIndex];
+            document.getElementById('lightbox-img').src = image.src;
+            document.getElementById('lightbox-caption').textContent = image.title;
+        }
+
+        // Close lightbox when clicking outside the image
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (document.getElementById('lightbox').style.display === 'flex') {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') changeImage(-1);
+                if (e.key === 'ArrowRight') changeImage(1);
+            }
+        });
+
+        // Preload images for better user experience
+        window.addEventListener('load', function() {
+            galleryImages.forEach(img => {
+                const image = new Image();
+                image.src = img.src;
+            });
+        });
+    </script>
+
+</body>
+</html>
